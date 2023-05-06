@@ -1,45 +1,35 @@
-import { useState } from 'react';
+import { React, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+// import axios from 'axios';
 
 function Signin() {
-    const [Email, setEmail] = useState('');
-    const [pw, setPw] = useState('');
+  const [email, setEmail] = useState('');
+  const [pw, setPw] = useState('');
 
-    const handleId = (e) => {
-        setEmail(e.target.value)
-    }
-    const handlePw = (e) => {
-        setPw(e.target.value)
-    }
+  const handleId = (e) => {
+    setEmail(e.target.value);
+  };
+  const handlePw = (e) => {
+    setPw(e.target.value);
+  };
 
-    const loginSub = (e) => {
-        e.preventDefault()
-        // axios
-    }
+  useEffect(() => {
+    // api
+  });
 
-    return (
-        <div>
-            <h1>Signin</h1>
-            <form method='POST'>
-                <label htmlFor='Email'>Email</label>
-                <input id='Email' 
-                    type='email' 
-                    value={Email} 
-                    placeholder='Email'
-                    onChange={handleId} 
-                    required 
-                />
-                <label htmlFor='pw'>PW</label>
-                <input id='pw' 
-                    type='password' 
-                    value={pw} 
-                    placeholder='Password'
-                    onChange={handlePw} 
-                    required 
-                />
-                <input type='submit' value='Login' onClick={loginSub} />
-            </form>
-        </div>
-    )
+  return (
+    <div>
+      <h1>SIGN IN</h1>
+      <form method="POST">
+        <input id="email" type="email" value={email} placeholder="Email" onChange={handleId} required />
+        <input id="pw" type="password" value={pw} placeholder="Password" onChange={handlePw} required />
+        <Link to="/">
+          <input type="submit" value="Login" />
+        </Link>
+      </form>
+    </div>
+  );
 }
 
 export default Signin;
