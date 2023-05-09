@@ -16,6 +16,7 @@ function Header() {
 }
 
 const Container = styled.div`
+  margin-right: 20px;
   display: flex;
   align-items: center;
   justify-content: end;
@@ -23,12 +24,13 @@ const Container = styled.div`
   height: 50px;
   button {
     width: 60px;
-    padding: 6px;
+    height: 30px;
     margin: 5px;
+    padding: 6px;
     border: none;
     border-radius: 15px;
-    background-color: white;
-    color: #767676;
+    background-color: #2bc194;
+    color: #faf8ff;
     cursor: pointer;
   }
 `;
