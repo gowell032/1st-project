@@ -8,7 +8,7 @@ function List() {
       <h1>Board</h1>
       <Table>
         <tr>
-          <th>id</th>
+          <th>No</th>
           <th>제목</th>
           <th>작성자</th>
           <th>작성일</th>
@@ -22,7 +22,7 @@ function List() {
 }
 
 const Container = styled.div`
-  padding: 30px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,13 +33,25 @@ const Container = styled.div`
     color: #2bc194;
     font-weight: 600;
   }
+  button {
+    margin: 10px;
+    padding: 10px;
+    width: 60px;
+    border: none;
+    border-radius: 20px;
+    background-color: #2bc194;
+    color: #faf8ff;
+  }
 `;
 const Table = styled.table`
   width: 800px;
   tr {
-    height: 25px;
+    display: flex;
+    justify-content: space-around;
+    height: 30px;
     border-bottom: 2px solid #767676;
     th {
+      padding-top: 5px;
       font-weight: 500;
     }
   }

@@ -8,3 +8,5 @@ root.render(
     <App />
   </React.StrictMode>,
 );
+
+// 서버 uri 43.201.115.216:3000
