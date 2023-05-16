@@ -26,7 +26,14 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: linear-gradient(to right top, #f4f5f9, #f7f7fa, #fafafc, #fcfcfd, #ffffff);
+  background-image: linear-gradient(
+    to right top,
+    #f4f5f9,
+    #f7f7fa,
+    #fafafc,
+    #fcfcfd,
+    #ffffff
+  );
   h1 {
     margin: 30px;
     font-size: 40px;
