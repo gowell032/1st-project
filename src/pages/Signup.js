@@ -1,8 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from 'axios';
 
 function Signup() {
+  const [id, setId] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passworCf, setPasswordCf] = useState('');
+
+  const idHandler = (e) => {
+    e.preventDefault;
+    setId(e.target.value);
+  };
+  const emailHandler = (e) => {
+    e.preventDefault;
+    setEmail(e.target.value);
+  };
+  const passwordHandler = (e) => {
+    e.preventDefault;
+    setPassword(e.target.value);
+  };
+  const passwordCfHandler = (e) => {
+    e.preventDefault;
+    setPasswordCf(e.target.value);
+  };
+
+  let body = {
+    email: email,
+    userName: id,
+    password: password,
+  };
+
+  const registerUser = (e) => {
+    e.preventDefault();
+    axios
+      .post('/auth/sign-up', body, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => console.log(res));
+  };
+
   return (
     <Container>
       <SignupBox>
@@ -12,11 +52,40 @@ function Signup() {
           </Link>
         </ModalClose>
         <h1>회원가입</h1>
-        <form method="POST">
-          <input id="userName" type="text" placeholder="이름을 입력하세요" required />
-          <input id="email" type="email" placeholder="Email을 입력하세요" required />
-          <input id="Pw" type="password" placeholder="비밀번호를 입력하세요" required />
-          <input id="PwConfirm" type="password" placeholder="비밀번호 확인" required />
+
+        <form onSubmit={registerUser}>
+          <input
+            id="userName"
+            type="text"
+            placeholder="ID를 입력하세요"
+            value={id}
+            onChange={idHandler}
+            required
+          />
+          <input
+            id="email"
+            type="email"
+            placeholder="Email을 입력하세요"
+            value={email}
+            onChange={emailHandler}
+            required
+          />
+          <input
+            id="Pw"
+            type="password"
+            placeholder="비밀번호를 입력하세요"
+            value={password}
+            onChange={passwordHandler}
+            required
+          />
+          <input
+            id="PwConfirm"
+            type="password"
+            placeholder="비밀번호 확인"
+            value={passworCf}
+            onChange={passwordCfHandler}
+            required
+          />
           <button type="submit">가입하기</button>
         </form>
       </SignupBox>

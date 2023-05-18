@@ -12,7 +12,7 @@ function Signin() {
           </Link>
         </ModalClose>
         <h1>로그인</h1>
-        <form method="POST">
+        <form>
           <input type="email" placeholder="Email을 입력하세요" required />
           <input type="password" placeholder="Password를 입력하세요" required />
           <button type="submit">시작하기</button>

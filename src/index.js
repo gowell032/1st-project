@@ -6,7 +6,5 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
 );
-
-// 서버 uri 43.201.115.216:3000

@@ -5,6 +5,7 @@ import Signup from './pages/Signup';
 import Write from './pages/Write';
 import Detail from './pages/Detail';
 import Home from './pages/Home';
+import Mypage from './pages/Mypage';
 import Header from './components/Header';
 import { Reset } from 'styled-reset';
 import GlobalStyle from './Globalstyles';
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/write" element={<Write />} />
           <Route path="/detail" element={<Detail />} />
+          <Route path="/mypage" element={<Mypage />} />
         </Route>
 
         <Route path="/signin" element={<Signin />} />

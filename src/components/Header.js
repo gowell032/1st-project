@@ -18,6 +18,10 @@ function Header() {
           <Link to="/signup">
             <button>회원가입</button>
           </Link>
+          <Link to="/Mypage">
+            <button>My</button>
+          </Link>
+          <button>로그아웃</button>
         </Join>
       </Container>
       <Outlet />

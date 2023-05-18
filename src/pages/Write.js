@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 function Write() {
-  // const [content, setContent] = useState('');
   const onChangeContent = (content) => {
     console.log(content);
   };
@@ -46,7 +45,6 @@ function Write() {
         <TextEditor
           theme="snow"
           placeholder="내용을 작성하세요"
-          // value={content}
           onChange={onChangeContent}
           modules={modules}
           formats={formats}
@@ -106,6 +104,9 @@ const Container = styled.div`
 const TextEditor = styled(ReactQuill)`
   .ql-container {
     height: 500px;
+    .h1 {
+      font-size: 20px;
+    }
   }
   .ql-editor strong {
     font-weight: bold;
