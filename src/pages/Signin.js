@@ -1,8 +1,48 @@
-import { React } from 'react';
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { React, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 function Signin() {
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const idHandler = (e) => {
+    e.preventDefault();
+    setEmail(e.target.value);
+  };
+  const passwordHandler = (e) => {
+    e.preventDefault();
+    setPassword(e.target.value);
+  };
+
+  let body = {
+    email: email,
+    password: password,
+  };
+
+  const loginUser = (e) => {
+    e.preventDefault();
+    axios
+      .post('/auth/sign-in', body, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then(function (response) {
+        localStorage.setItem('token', response.data.token);
+        alert('로그인에 성공하셨습니다.');
+        navigate('/');
+      })
+      .catch(function (error) {
+        if (error) {
+          alert('ID와 비밀번호를 다시 확인해주세요.');
+        }
+      });
+  };
+
   return (
     <Container>
       <SigninBox>
@@ -12,9 +52,21 @@ function Signin() {
           </Link>
         </ModalClose>
         <h1>로그인</h1>
-        <form>
-          <input type="email" placeholder="Email을 입력하세요" required />
-          <input type="password" placeholder="Password를 입력하세요" required />
+        <form onSubmit={loginUser}>
+          <input
+            type="email"
+            placeholder="Email을 입력하세요"
+            value={email}
+            onChange={idHandler}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password를 입력하세요"
+            value={password}
+            onChange={passwordHandler}
+            required
+          />
           <button type="submit">시작하기</button>
         </form>
       </SigninBox>

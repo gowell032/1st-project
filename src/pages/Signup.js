@@ -1,28 +1,30 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
 function Signup() {
+  const navigate = useNavigate();
+
   const [id, setId] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passworCf, setPasswordCf] = useState('');
 
   const idHandler = (e) => {
-    e.preventDefault;
+    e.preventDefault();
     setId(e.target.value);
   };
   const emailHandler = (e) => {
-    e.preventDefault;
+    e.preventDefault();
     setEmail(e.target.value);
   };
   const passwordHandler = (e) => {
-    e.preventDefault;
+    e.preventDefault();
     setPassword(e.target.value);
   };
   const passwordCfHandler = (e) => {
-    e.preventDefault;
+    e.preventDefault();
     setPasswordCf(e.target.value);
   };
 
@@ -32,6 +34,8 @@ function Signup() {
     password: password,
   };
 
+  // 회원가입 가이드 해주기. 이미 존재하는 아이디일때 유저가 알수있게끔.
+
   const registerUser = (e) => {
     e.preventDefault();
     axios
@@ -40,7 +44,16 @@ function Signup() {
           'Content-Type': 'application/json',
         },
       })
-      .then((res) => console.log(res));
+      .then(function (response) {
+        localStorage.setItem('token', response.data.token);
+        alert('가입에 성공하셨습니다.');
+        navigate('/');
+      })
+      .catch(function (error) {
+        if (error) {
+          alert('ID와 비밀번호를 다시 확인해주세요.');
+        }
+      });
   };
 
   return (

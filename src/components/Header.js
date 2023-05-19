@@ -3,6 +3,11 @@ import styled from 'styled-components';
 import { Link, Outlet } from 'react-router-dom';
 
 function Header() {
+  const test = () => {
+    localStorage.removeItem('token');
+    alert('로그아웃 되었습니다.');
+    window.location.replace('/');
+  };
   return (
     <>
       <Container>
@@ -11,18 +16,23 @@ function Header() {
             <button>Board</button>
           </Link>
         </Logo>
-        <Join>
-          <Link to="/signin">
-            <button>로그인</button>
-          </Link>
-          <Link to="/signup">
-            <button>회원가입</button>
-          </Link>
-          <Link to="/Mypage">
-            <button>My</button>
-          </Link>
-          <button>로그아웃</button>
-        </Join>
+        {localStorage.length === 0 ? (
+          <Join>
+            <Link to="/signin">
+              <button>로그인</button>
+            </Link>
+            <Link to="/signup">
+              <button>회원가입</button>
+            </Link>
+          </Join>
+        ) : (
+          <Join>
+            <Link to="/Mypage">
+              <button>My</button>
+            </Link>
+            <button onClick={test}>로그아웃</button>
+          </Join>
+        )}
       </Container>
       <Outlet />
     </>
