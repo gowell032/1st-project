@@ -51,7 +51,9 @@ function Signup() {
       })
       .catch(function (error) {
         if (error) {
+          // 송현님한테 어떤 부분이 틀릴때 어떤 에러를 내는지 여쭤보기.
           alert('ID와 비밀번호를 다시 확인해주세요.');
+          console.log(error);
         }
       });
   };

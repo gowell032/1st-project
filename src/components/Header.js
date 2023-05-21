@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import { Link, Outlet } from 'react-router-dom';
 
 function Header() {
-  const test = () => {
+  const logout = () => {
     localStorage.removeItem('token');
     alert('로그아웃 되었습니다.');
     window.location.replace('/');
   };
+
   return (
     <>
       <Container>
@@ -16,7 +17,7 @@ function Header() {
             <button>Board</button>
           </Link>
         </Logo>
-        {localStorage.length === 0 ? (
+        {localStorage.getItem('token') === null ? (
           <Join>
             <Link to="/signin">
               <button>로그인</button>
@@ -30,7 +31,7 @@ function Header() {
             <Link to="/Mypage">
               <button>My</button>
             </Link>
-            <button onClick={test}>로그아웃</button>
+            <button onClick={logout}>로그아웃</button>
           </Join>
         )}
       </Container>

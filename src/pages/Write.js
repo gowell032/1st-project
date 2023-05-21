@@ -1,14 +1,56 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 function Write() {
-  const onChangeContent = (content) => {
-    console.log(content);
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [subCategoryId, setSubCategoryId] = useState(0);
+
+  const contentHandler = (content) => {
+    setContent(content);
   };
 
+  const titleHandler = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const domesticHandler = (e) => {
+    e.preventDefault();
+    setSubCategoryId(2);
+  };
+  const internationalHandler = (e) => {
+    e.preventDefault();
+    setSubCategoryId(3);
+  };
+
+  let body = {
+    title: title,
+    subCategoryId: subCategoryId,
+    content: content,
+  };
+
+  const token = localStorage.getItem('token');
+
+  const writePost = (e) => {
+    e.preventDefault();
+    axios
+      .post('/community/post', body, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(function (response) {
+        if (response.request.status === 201) {
+          alert('글이 생성되었습니다.');
+          window.location.replace('/');
+        }
+      })
+      .catch((error) => console.log(error));
+  };
   const modules = {
     toolbar: [
       [{ header: 1 }, { header: 2 }],
@@ -41,19 +83,31 @@ function Write() {
   return (
     <Container>
       <form>
-        <input type="text" placeholder="제목을 입력하세요" />
+        <input
+          type="text"
+          placeholder="제목을 입력하세요"
+          value={title}
+          onChange={titleHandler}
+        />
+        <CategoriesWrap>
+          <button value={subCategoryId} onClick={domesticHandler}>
+            국내
+          </button>
+          <button value={subCategoryId} onClick={internationalHandler}>
+            국외
+          </button>
+        </CategoriesWrap>
         <TextEditor
           theme="snow"
-          placeholder="내용을 작성하세요"
-          onChange={onChangeContent}
+          placeholder={'내용을 작성하세요'}
+          value={content}
+          onChange={contentHandler}
           modules={modules}
           formats={formats}
         />
         <BtnBox>
-          <Link to="/">
-            <button>돌아가기</button>
-          </Link>
-          <button>게시하기</button>
+          <button>돌아가기</button>
+          <button onClick={writePost}>게시하기</button>
         </BtnBox>
       </form>
     </Container>
@@ -78,7 +132,6 @@ const Container = styled.div`
     flex-direction: column;
   }
   input {
-    margin-bottom: 10px;
     padding: 5px;
     width: 100%;
     height: 40px;
@@ -101,21 +154,34 @@ const Container = styled.div`
     border-bottom: 2px solid #2bc194;
   }
 `;
+
+const CategoriesWrap = styled.div`
+  button {
+    width: 50px;
+    height: 30px;
+  }
+`;
 const TextEditor = styled(ReactQuill)`
   .ql-container {
     height: 500px;
-    .h1 {
-      font-size: 20px;
+    .ql-editor.ql-blank::before {
+      font-size: 16px;
     }
-  }
-  .ql-editor strong {
-    font-weight: bold;
-  }
-  .ql-editor em {
-    font-style: italic;
-  }
-  p {
-    font-size: 16px;
+    .ql-editor strong {
+      font-weight: bold;
+    }
+    .ql-editor em {
+      font-style: italic;
+    }
+    h1 {
+      font-size: 32px;
+    }
+    h2 {
+      font-size: 24px;
+    }
+    p {
+      font-size: 16px;
+    }
   }
 `;
 const BtnBox = styled.div`

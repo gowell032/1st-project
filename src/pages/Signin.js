@@ -37,8 +37,10 @@ function Signin() {
         navigate('/');
       })
       .catch(function (error) {
-        if (error) {
+        if (error.response.data.statusCode === 500) {
           alert('ID와 비밀번호를 다시 확인해주세요.');
+        } else if (error.response.data.statusCode === 401) {
+          alert('비밀번호를 다시 확인해주세요.');
         }
       });
   };
