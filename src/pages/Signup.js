@@ -123,11 +123,11 @@ const SignupBox = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 2px solid #2bc194;
+  border: 2px solid black;
   border-radius: 30px;
   background-color: white;
   h1 {
-    color: #2bc194;
+    color: black;
     margin: 15px;
     font-size: 40px;
     font-weight: 600;
@@ -141,7 +141,7 @@ const SignupBox = styled.div`
       width: 240px;
       height: 23px;
       padding: 10px;
-      border: 2px solid #2bc194;
+      border: 2px solid black;
       border-radius: 15px;
       outline: none;
     }
@@ -152,7 +152,7 @@ const SignupBox = styled.div`
       height: 42px;
       border: none;
       border-radius: 15px;
-      background-color: #2bc194;
+      background-color: black;
       color: #faf8ff;
     }
   }
@@ -165,7 +165,7 @@ const ModalClose = styled.div`
     font-size: 25px;
     border: none;
     background-color: white;
-    color: #2bc194;
+    color: black;
   }
   button:hover {
     background-color: #efefef;

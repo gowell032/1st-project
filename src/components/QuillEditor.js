@@ -1,20 +1,19 @@
 import axios from 'axios';
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { useMemo } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import styled from 'styled-components';
 
-function QuillEditor({ value, onChange }) {
+function QuillEditor({ value, onChange, gotUrl, setGotUrl }) {
   const quillRef = useRef(null);
   const token = localStorage.getItem('token');
-  const [gotUrl, setGotUrl] = useState([]);
 
   const contentHandler = (content) => {
     onChange(content);
   };
 
-  // 이미지 처리 함수
+  // base64 -> url로 변환하기 위한 이미지 처리 함수
 
   const imageHandler = () => {
     const input = document.createElement('input');
@@ -91,21 +90,19 @@ function QuillEditor({ value, onChange }) {
   ];
 
   return (
-    <div>
-      <TextEditor
-        ref={quillRef}
-        theme="snow"
-        placeholder={'내용을 작성하세요'}
-        value={value}
-        onChange={contentHandler}
-        modules={modules}
-        formats={formats}
-      />
-    </div>
+    <StyledReactQuill
+      ref={quillRef}
+      theme="snow"
+      placeholder={'내용을 작성하세요'}
+      value={value}
+      onChange={contentHandler}
+      modules={modules}
+      formats={formats}
+    />
   );
 }
 
-const TextEditor = styled(ReactQuill)`
+const StyledReactQuill = styled(ReactQuill)`
   .ql-container {
     height: 500px;
     .ql-editor.ql-blank::before {
